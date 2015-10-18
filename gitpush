@@ -3,4 +3,4 @@ git add -A
 comment=`git status|grep -e deleted: -e renamed: -e modified: -e 'new file:'|tr '\n' ','|tr -s '     '|tr -d '#'|tr '\t' ' '`
 
 git commit -m "$comment comment_by_`basename $0`"
-#git push
+git push
