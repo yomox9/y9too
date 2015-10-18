@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# The menu for nmrihserver
 trap "show_mainmenu" 1 2 3
 show_mainmenu()
 {

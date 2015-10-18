@@ -1,5 +1,5 @@
 #!/bin/sh
 
 git add -A
-git commit -m "`git status|grep file:|tr '\n' ','|tr -s ' '|tr -d '#'|tr '\t' ' '`. commit_by_gitpush"
+git commit -m "`git status|grep -e deleted: -e renamed: -e modified: -e 'new file:'|tr '\n' ','|tr -s ' '|tr -d '#'|tr '\t' ' '`. commit_by_gitpush"
 git push
