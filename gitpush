@@ -1,5 +1,5 @@
-#!/bin/sh
-
+#!/bin/sh -eu
+echo git add -A
 git add -A
 comment=`git status|grep -e deleted: -e renamed: -e modified: -e 'new file:'|tr '\n' ','|tr -s '     '|tr -d '#'|tr '\t' ' '`
 
