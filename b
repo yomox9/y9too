@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/sh -eu
 #background exec shell
 
 datetime=`date +%Y%m%d_%H%M%S`
