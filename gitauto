@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#auto git 
+b pushd ~/dotfiles && gitpush.sh
+#b pushd ~/y9tool && gitpush.sh &
