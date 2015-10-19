@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -eu
 
 cd /usr/share/nano || exit 1
 wget -N -nd -A nanorc -R robots.txt -l 1 -r https://nanosyntax.googlecode.com/svn/trunk/syntax-nanorc/
