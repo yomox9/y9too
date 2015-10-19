@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/sh -eu
 echo git pull
 git pull
 echo git add -A
