@@ -1,0 +1,22 @@
+#!/bin/sh -eux
+
+# sourcemod 
+wget -nd -nc https://www.sourcemod.net/downloads.php?branch=stable
+targeturl=`grep 'Linux download' downloads.php\?branch\=stable|head -1 | awk -F\' '{print $2}'`
+wget -nd -nc $targeturl
+rm downloads.php\?branch=stable
+targetfile=`echo $targeturl | awk -F/ '{print $6}'`
+if [ ! -e addons ];then
+	echo tar xvf $targetfile
+	tar xvf $targetfile
+fi
+
+# metamod
+wget -nd -nc https://www.sourcemm.net/downloads
+targetfile=`grep linux downloads  | head -1 | awk -F'[/"]' '{print $4}'`
+targeturl=http://cdn.probablyaserver.com/sourcemod/$targetfile
+wget -nd -nc $targeturl
+if [ ! -e addons/metamod/README.txt ];then
+	tar xvf $targetfile
+fi
+rm downloads
