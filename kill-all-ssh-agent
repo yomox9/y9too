@@ -1,0 +1,1 @@
+eval `ps -ef|grep ssh-agent | awk '{ st = "kill"; printf("%s %d\n",st,$2) }'`
