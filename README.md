@@ -1,5 +1,5 @@
 自分用ツール<br>
-execr.sh ←再帰的にコマンドを実行(find を簡単に)
+execr.sh ←再帰的にコマンドを実行(find を簡単に)<br>
 gitauto.sh ←特定フォルダを自動的にgitpush.sh<br>
 gitpush.sh ←git pull;git add -A; git commit -m xx;git push を行う。git pushが楽(インデックスを生かしてない気はするけど)<br>
 grepc.sh ←コメント行以外を表示<br>
