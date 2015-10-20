@@ -20,10 +20,14 @@ execlog cat /etc/system-release
 execlog cat /etc/system-release-cpe
 
 execlog cat /proc/cpuinfo
-
+execlog lscpu
 execlog egrep '(vmx|svm)' /proc/cpuinfo
 
 execlog cat /proc/meminfo
+
+execlog uptime
+
+execlog sysstat
 
 execlog lspci
 
