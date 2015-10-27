@@ -5,13 +5,11 @@ if [ $# -le 2 ];then
 	echo example. `basename $0` *.bz2 bzip2 -d target
 else
 	echo '$1'=$1
-	target=$1
-	shift
-	echo '$*'=$*
-	execcmd=`echo $* | sed s/target/\{\}/`
+	echo '${@:2}'=${@:2}
+	execcmd=`echo ${@:2} | sed s/target/\{\}/`
 	echo execcmd=$execcmd
-	echo find . -name $target -execdir $execcmd \;
-	find . -name $target -execdir $execcmd \;
+	echo find . -name "$1" -execdir $execcmd \;
+	find . -name "$1" -execdir $execcmd \;
 fi
 
 
