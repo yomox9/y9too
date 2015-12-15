@@ -1,0 +1,16 @@
+#!/bin/sh -eu
+
+echo original name=$1
+fname=${1##*/}
+fname=${fname%.*}
+echo fname=$fname
+
+cd ~nmrihserver
+unzip $1
+mv ${fname}.bsp ${fname}.nav ${fname}.nmo nmrih/maps/
+
+echo ---------------_
+ls /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
+echo ---------------_
+ls ~nmrihserver
+echo end._
