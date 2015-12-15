@@ -14,3 +14,8 @@ bzip2 $fname.*
 bzip2 -d $fname.*
 bzip2 $fname.*
 
+echo ---------------
+ls -laF /var/www/html/maps/${fname}.*
+echo ---------------
+ls -laF ~nmrihserver
+echo end.
