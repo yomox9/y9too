@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/sh 
 
 echo original name=$1
 fname=${1##*/}
@@ -8,6 +8,7 @@ echo fname=$fname
 cd ~nmrihserver
 unzip $1
 mv ${fname}.bsp ${fname}.nav ${fname}.nmo nmrih/maps/
+mv ${fname}/${fname}.bsp ${fname}/${fname}.nav ${fname}/${fname}.nmo nmrih/maps/
 
 echo ---------------_
 ls /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
