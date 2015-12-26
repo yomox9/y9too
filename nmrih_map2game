@@ -5,13 +5,24 @@ fname=${1##*/}
 fname=${fname%.*}
 echo fname=$fname
 
+if [ "$1" = "" ];then
+  echo usage : ${0##*/} mapfile.zip
+fi
+
 cd ~nmrihserver
 unzip $1
-mv ${fname}.bsp ${fname}.nav ${fname}.nmo nmrih/maps/
-mv ${fname}/${fname}.bsp ${fname}/${fname}.nav ${fname}/${fname}.nmo nmrih/maps/
+if [ -e ${fname}.bsp ]; then
+	mv ${fname}.bsp ${fname}.nav ${fname}.nmo nmrih/maps/
+else
+	mv ${fname}/${fname}.bsp ${fname}/${fname}.nav ${fname}/${fname}.nmo nmrih/maps/
+fi
 
+rm $1
+if [ -e ${fname} ];then
+	rmdir ${fname}
+fi
 echo ---------------_
-ls /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
+ls -l /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
 echo ---------------_
-ls ~nmrihserver
+ls -l ~nmrihserver
 echo end._
