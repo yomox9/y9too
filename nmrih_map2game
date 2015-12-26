@@ -1,28 +1,68 @@
-#!/bin/sh 
+#!/bin/sh
 
-echo original name=$1
-fname=${1##*/}
-fname=${fname%.*}
-echo fname=$fname
+nmrihpath=nmrih/maps
+mapcyclefn=mapcycle_all.txt
+tmpfn=${0##*/}.tmp
 
-if [ "$1" = "" ];then
-  echo usage : ${0##*/} mapfile.zip
-fi
+getfn(){
+	echo original name=$1
+	fname=${1##*/}
+	fname=${fname%.*}
+	echo fname=$fname
+}
+movefile(){
+for i in bsp nav nmo ;do
+	if [ -e ${fname}.$i ];then mv ${fname}.$i $nmrihpath;fi
+	if [ -e ${fname}/${fname}.$i ];then mv ${fname}/${fname}.$i $nmrihpath;fi
+done
+}
+chownfile(){
+for i in bsp nav nmo ;do
+	if [ -e $nmrihpath/${fname}.$i ];then chown nmrihserver:nmrihserver $nmrihpath/${fname}.$i ;fi
+done
+}
+delfile(){
+	#rm $1
+	if [ -e ${fname}/ ];then
+		rmdir ${fname}/
+	fi
+	if [ -e $tmpfn ];then rm $tmpfn ;fi
+}
+confirmfile(){
+	echo --------------------------------------------_
+	for zipfile in `ls nmo_*.zip nms_*.zip`;do
+		getfn $zipfile
+		ls -l /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
+	done
+	echo --------------------------------------------_
+	for zipfile in `ls nmo_*.zip nms_*.zip`;do
+		getfn $zipfile
+		grep ${fname} $mapcyclefn
+	done
+	echo --------------------------------------------_
+	ls -l ~nmrihserver
+	echo end._
+}
+add2mapcycle(){
+	grep ${fname} $mapcyclefn
+	if [ $? = 1 ];then
+		if [ ! -e bak/ ];then mkdir bak/ ;fi
+		cp -p $mapcyclefn bak/
+		cp -p $mapcyclefn $tmpfn
+		echo ${fname}>>$tmpfn
+		sort $tmpfn>$mapcyclefn
+	fi
+}
 
 cd ~nmrihserver
-unzip $1
-if [ -e ${fname}.bsp ]; then
-	mv ${fname}.bsp ${fname}.nav ${fname}.nmo nmrih/maps/
-else
-	mv ${fname}/${fname}.bsp ${fname}/${fname}.nav ${fname}/${fname}.nmo nmrih/maps/
-fi
+if [ -e $tmpfn ];then rm $tmpfn;fi
+for zipfile in `ls nmo_*.zip nms_*.zip`;do
+	getfn $zipfile
+	unzip -o $zipfile
+	movefile
+	chownfile
+	add2mapcycle
+	delfile
+done
+confirmfile
 
-rm $1
-if [ -e ${fname} ];then
-	rmdir ${fname}
-fi
-echo ---------------_
-ls -l /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
-echo ---------------_
-ls -l ~nmrihserver
-echo end._
