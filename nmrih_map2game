@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 
 nmrihpath=nmrih/maps
 mapcyclefn=mapcycle_all.txt
@@ -30,12 +30,12 @@ delfile(){
 }
 confirmfile(){
 	echo --------------------------------------------_
-	for zipfile in `ls nmo_*.zip nms_*.zip`;do
+	for zipfile in `ls nm*.*`;do
 		getfn $zipfile
 		ls -l /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
 	done
 	echo --------------------------------------------_
-	for zipfile in `ls nmo_*.zip nms_*.zip`;do
+	for zipfile in `ls nm*.*`;do
 		getfn $zipfile
 		grep ${fname} $mapcyclefn
 	done
@@ -53,12 +53,19 @@ add2mapcycle(){
 		sort $tmpfn>$mapcyclefn
 	fi
 }
+extract(){
+if [ -e ${fname}.zip ];then
+		unzip -o $fname.zip
+elif [ -e $fname.rar ];then
+	unrar x $fname.rar
+fi
+}
 
 cd ~nmrihserver
 if [ -e $tmpfn ];then rm $tmpfn;fi
-for zipfile in `ls nmo_*.zip nms_*.zip`;do
+for zipfile in `ls nm*.zip nm*.rar`;do
 	getfn $zipfile
-	unzip -o $zipfile
+	extract $zipfile
 	movefile
 	chownfile
 	add2mapcycle
