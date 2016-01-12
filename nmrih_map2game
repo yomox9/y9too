@@ -29,17 +29,17 @@ delfile(){
 	if [ -e $tmpfn ];then rm $tmpfn ;fi
 }
 confirmfile(){
-	echo --------------------------------------------_
+	echo --- maps -----------------------------------------
 	for zipfile in `ls nm*.*`;do
 		getfn $zipfile
 		ls -l /home/nmrihserver/serverfiles/nmrih/maps/${fname}.*
 	done
-	echo --------------------------------------------_
+	echo --- mapcycle -----------------------------------------
 	for zipfile in `ls nm*.*`;do
 		getfn $zipfile
 		grep ${fname} $mapcyclefn
 	done
-	echo --------------------------------------------_
+	echo --------------------------------------------
 	ls -l ~nmrihserver
 	echo end._
 }
