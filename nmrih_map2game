@@ -24,7 +24,7 @@ done
 delfile(){
 	#rm $1
 	if [ -e ${fname}/ ];then
-		rmdir ${fname}/
+		rm -rf ${fname}/
 	fi
 	if [ -e $tmpfn ];then rm $tmpfn ;fi
 }
