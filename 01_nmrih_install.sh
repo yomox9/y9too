@@ -9,9 +9,10 @@ if [ $? == 0 ];then
 	tar -xvzf steamcmd_linux.tar.gz
 	ln -s ~nmrihserver/y9tool/nmrih_update.sh .
 	cd ~
+	cp -p ~/y9tool/config/server_srvXX.cfg ~/serverfiles/nmrih/cfg/
 	ln -s /home/nmrihserver/serverfiles/nmrih/maps/ .
 	ln -s /home/nmrihserver/serverfiles/nmrih/ .
 	ln -s /home/nmrihserver/serverfiles/nmrih/cfg/server_common.cfg .
 	ln -s /home/nmrihserver/serverfiles/nmrih/cfg/server_footer.cfg .
-	ln -s /home/nmrihserver/serverfiles/nmrih/cfg/server.cfg .
+	ln -s /home/nmrihserver/serverfiles/nmrih/cfg/server_srvXX.cfg .
 fi
