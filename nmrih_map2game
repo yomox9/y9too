@@ -56,7 +56,7 @@ add2mapcycle(){
 extract(){
 if [ -e ${fname}.zip ];then
 		unzip -o $fname.zip
-elif [ -e $fname.rar ];then
+elif [ -e ${fname}.rar ];then
 	unrar x $fname.rar
 fi
 }
