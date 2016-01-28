@@ -1,6 +1,8 @@
 id | grep nmrihserver
 if [ $? == 0 ];then
 	sudo yum install glibc.i686 libstdc++.i686
+	cd ~/serverfiles
+	ln -s ~nmrihserver/y9tool/s.sh .
 	mkdir ~/steamcmd
 	cd ~/steamcmd
 	wget -nc https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
