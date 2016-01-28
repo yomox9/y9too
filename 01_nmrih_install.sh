@@ -10,6 +10,7 @@ if [ $? == 0 ];then
 	ln -s ~nmrihserver/y9tool/nmrih_update.sh .
 	cd ~
 	cp -p ~/y9tool/config/server_srvXX.cfg ~/serverfiles/nmrih/cfg/
+	cp -p ~/y9tool/config/motd_srvXX.txt   ~/serverfiles/nmrih/cfg/
 	ln -s /home/nmrihserver/serverfiles/nmrih/maps/ .
 	ln -s /home/nmrihserver/serverfiles/nmrih/ .
 	ln -s /home/nmrihserver/serverfiles/nmrih/cfg/server_common.cfg .
