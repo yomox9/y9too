@@ -2,5 +2,5 @@
 
 #auto git
 set +e
-~nmrihserver/y9tool/b pushd ~/dotfiles ; sleep 1 && ~nmrihserver/y9tool/b gitpush.sh; sleep 1
-~nmrihserver/y9tool/b pushd ~/y9tool   ; sleep 1 && ~nmrihserver/y9tool/b gitpush.sh; sleep 1
+pushd ~/dotfiles && gitpush.sh
+pushd ~/y9tool   && gitpush.sh
