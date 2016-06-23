@@ -1,5 +1,6 @@
 #!/bin/sh
 
+clear
 if [ "$1" = "/d" ];then
 	delflg=1
 else
@@ -11,6 +12,7 @@ mapcfn=mapcycle.txt
 mapc=$mapcdir$mapcfn
 mapsdir=~nmrihserver/serverfiles/nmrih/maps/
 movetgtdir=~nmrihserver/Deleted/
+existflg=0
 
 echo mapcdir=$mapcdir
 echo mapcfn=$mapcfn
@@ -21,17 +23,31 @@ echo movetgtdir=$movetgtdir
 cnt=0
 
 main(){
-for i in `ls ${mapsdir}*.bsp`;do
-	fn=`basename $i .bsp`
-	# echo -n $fn ===
+for i in `ls ${mapsdir}*.*`;do
+	fn=`basename $i .ztmp`
+	fn=`basename $fn .prt`
+	fn=`basename $fn .bsp`
+	fn=`basename $fn .nav`
+	fn=`basename $fn .nmo`
+	bn=`basename $i`
+	#echo === i=$i fn=$fn ===================================
 	grep -w $fn ${mapc}>nul
 	if [ $? = 0 ];then
-		echo Exist === $fn
+		if [ $existflg = 0 ];then
+			echo
+			echo -n Exist === $bn
+		else
+			echo -n " / $bn"
+		fi
+		existflg=1
 	else
-		echo not Exist === $fn
+		existflg=0
+		echo
+		echo
+		echo -n Not Exist === $bn
 		for j in bsp nav nmo;do
 			if [ -e $mapsdir$fn.$j ];then
-				ls $mapsdir$fn.$j
+				echo " ( `ls $mapsdir$fn.$j` )"
 				if [ $delflg = 1 ];then
 					if [ ! -e $movetgtdir ];then
 						mkdir $movetgtdir
@@ -49,6 +65,7 @@ for i in `ls ${mapsdir}*.bsp`;do
 	cnt=`expr ${cnt} + 1`
 done
 }
+if [ existflg = 0 ];then echo;fi
 
 if [ -e $mapc ];then
 	main
