@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 nmrihpath=nmrih/maps
 mapcyclefn=mapcycle.txt
