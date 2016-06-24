@@ -26,12 +26,15 @@ main(){
 for i in `ls ${mapsdir}*.*`;do
 	fn=`basename $i .ztmp`
 	fn=`basename $fn .prt`
+	fn=`basename $fn _level_sounds.txt`
+	fn=`basename $fn .txt`
+	fn=`basename $fn .nmos`
 	fn=`basename $fn .bsp`
 	fn=`basename $fn .nav`
 	fn=`basename $fn .nmo`
 	bn=`basename $i`
 	#echo === i=$i fn=$fn ===================================
-	grep -w $fn ${mapc}>nul
+	grep -i -w $fn ${mapc}>nul
 	if [ $? = 0 ];then
 		if [ $existflg = 0 ];then
 			echo
@@ -44,34 +47,35 @@ for i in `ls ${mapsdir}*.*`;do
 		existflg=0
 		echo
 		echo
-		echo -n Not Exist === $bn
-		for j in bsp nav nmo;do
-			if [ -e $mapsdir$fn.$j ];then
-				echo " ( `ls $mapsdir$fn.$j` )"
-				if [ $delflg = 1 ];then
-					if [ ! -e $movetgtdir ];then
-						mkdir $movetgtdir
-					fi
-					mv $mapsdir$fn.$j $movetgtdir
-					if [ ! -e $mapsdir$fn.$j ];then
-						echo Deleted
-					else
-						echo Delete failed!
-					fi
-				fi
+		echo -n "Not Exist === $bn ( $i ) $fn"
+		if [ $delflg = 1 ];then
+			if [ ! -e $movetgtdir ];then
+				mkdir $movetgtdir
 			fi
-		done
+			mv $i $movetgtdir
+			if [ ! -e $i ];then
+				echo " Deleted"
+			else
+				echo " Delete failed!"
+			fi
+		else
+			echo
+		fi
 	fi
 	cnt=`expr ${cnt} + 1`
 done
 }
-if [ existflg = 0 ];then echo;fi
 
 if [ -e $mapc ];then
 	main
+	if [ existflg = 0 ];then echo;fi
+	echo =======================================================================
 	echo Total $cnt files
 	if [ $delflg = 0 ];then
 		echo If you want delete these files, Do `basename $0` /d
+	else
+		echo Deleted=$movetgtdir
+		ls $movetgtdir
 	fi
 else
 	echo Not exist $mapc
